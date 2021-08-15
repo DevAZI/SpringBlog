@@ -1,4 +1,4 @@
-package HelloSpringBlog.SpringBlog;
+package HelloSpringBlog.SpringBlog.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -15,6 +16,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+//@DynamicInsert //null값을 default로
 public class User {
     @Id//primaryKey
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +31,9 @@ public class User {
     @Column(nullable = false, length = 50)
     private String email;
 
-    @ColumnDefault("'user'")
-    private String role; //Enum을 써야함
+    //@ColumnDefault("'user'")
+    @Enumerated(EnumType.STRING)
+    private RoleType role; //Enum을 써야함
 
     @CreationTimestamp// 시간 자동 입력
     private Timestamp createDate;

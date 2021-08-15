@@ -1,4 +1,4 @@
-package HelloSpringBlog.SpringBlog;
+package HelloSpringBlog.SpringBlog.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 
 @Data
@@ -31,9 +32,13 @@ public class Board {
     @ColumnDefault("0")
     private int count;
 
-    @ManyToOne //Many = Board , One = user >> 한명(user)이 여러개의 개시글을 사용할 수 있음
+    //FetchType.Eager = 즉시 // .lazy = 지연
+    @ManyToOne(fetch = FetchType.LAZY) //Many = Board , One = user >> 한명(user)이 여러개의 개시글을 사용할 수 있음
     @JoinColumn(name = "userId")
     private User user; //db는 object저장 불가능 >  FK이용해야함, > 자바는 object가능 but db는 불가능
+
+    @OneToMany(mappedBy = "board")
+    private List<Reply> reply;
 
     @CreationTimestamp
     private Timestamp createDate;

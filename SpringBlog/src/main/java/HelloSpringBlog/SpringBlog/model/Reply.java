@@ -1,4 +1,4 @@
-package HelloSpringBlog.SpringBlog;
+package HelloSpringBlog.SpringBlog.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
