@@ -15,9 +15,13 @@ public class UserService {
 
     @Transactional
     public void 회원가입(User user) {
-    userRepository.save(user);
+        userRepository.save(user);
+    }
 
-
-
+    @Transactional(readOnly = true ) // select 할때 트랜젝션 시작, 서비스 종료시 트랜잭션 종료 ( 정합성 )
+    public User 로그인(User user) {
+       return  userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+    }
 }
-}
+
+

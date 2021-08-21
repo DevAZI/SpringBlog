@@ -18,7 +18,7 @@
                 </label>
             </div>
         </form>
-        <button type="btn-login" class="btn btn-primary">로그인완료</button>
+        <button id="btn-login" class="btn btn-primary">로그인완료</button>
     </div>
     <script src = "/blog/js/user.js" ></script>
 

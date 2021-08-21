@@ -3,6 +3,9 @@
         $('#btn-save').on('click',()=>{   //function >사용이유> ()=> this를 바인딩하기 위하여
             this.save();
         });
+        $('#btn-login').on('click',()=>{   //function >사용이유> ()=> this를 바인딩하기 위하여
+            this.login();
+        });
     },
 
 
