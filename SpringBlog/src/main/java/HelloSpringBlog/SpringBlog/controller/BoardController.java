@@ -11,6 +11,11 @@ public class BoardController {
     public String index() throws Exception {
         return "index";
     }
+
+    @GetMapping("/board/saveForm")
+    public String saveForm() {
+        return "board/saveForm";
+    }
 }
 
 

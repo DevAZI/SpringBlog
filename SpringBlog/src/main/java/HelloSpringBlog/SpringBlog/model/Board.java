@@ -29,7 +29,7 @@ public class Board {
     @Lob
     private String content;//섬머노트 라이브러리 사용(  <html> )
 
-    @ColumnDefault("0")
+    //@ColumnDefault("0")
     private int count;
 
     //FetchType.Eager = 즉시 // .lazy = 지연
