@@ -1,5 +1,6 @@
 package HelloSpringBlog.SpringBlog.service;
 
+import HelloSpringBlog.SpringBlog.config.auth.PrincipalDetail;
 import HelloSpringBlog.SpringBlog.model.Board;
 import HelloSpringBlog.SpringBlog.model.RoleType;
 import HelloSpringBlog.SpringBlog.model.User;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Principal;
 import java.util.List;
 
 //스프링이 컴포넌트 스캔을 통하여 bean에 등록해줌
@@ -29,15 +31,25 @@ public class BoardService {
         board.setUser(user);
         boardRepository.save(board);
     }
-
+    @Transactional(readOnly = true)
     public Board 글상세보기(int id) {
         return boardRepository.findById(id)
                 .orElseThrow(() -> {
                     return new IllegalArgumentException("글 상세보기 실패 : 아이디를 찾을 수 없습니다.");
                 });
     }
+    @Transactional
+    public void 글삭제하기(int id) {
 
-
+        /*Board board = boardRepository.findById(id).orElseThrow(() -> {
+            return new IllegalArgumentException("글 상세보기 실패 : 아이디를 찾을 수 없습니다.");
+        });
+        if (board.getUser().getId() != principal.getUser().getId()) {
+            throw new IllegalArgumentException("해당글을 삭제할 권한이 없습니다.");
+        }*/
+        boardRepository.deleteById(id);
+    }
+    @Transactional(readOnly = true)
     public Page<Board> 글목록 (Pageable pageable) {
         return boardRepository.findAll(pageable);
     }

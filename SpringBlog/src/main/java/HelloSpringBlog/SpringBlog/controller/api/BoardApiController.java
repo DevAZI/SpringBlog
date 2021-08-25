@@ -9,9 +9,7 @@ import HelloSpringBlog.SpringBlog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class BoardApiController {
@@ -30,11 +28,16 @@ public class BoardApiController {
         boardService.글쓰기(board, principal.getUser());
         return new ResponceDto<Integer>(HttpStatus.OK.value(), 1);
     }
+    @DeleteMapping("/api/board/{id}")
+    //@RequestMapping(value="/api/board/{id}", method=RequestMethod.DELETE)
+    public ResponceDto<Integer>deleteById(@PathVariable int id) {
+        boardService.글삭제하기(id);
+        return new ResponceDto<Integer>(HttpStatus.OK.value(), 1);
+    }
 
 
 
-
-
+}
 
 
 
@@ -55,4 +58,4 @@ public class BoardApiController {
 
 
 
-}
+
