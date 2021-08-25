@@ -39,14 +39,26 @@ public class BoardService {
                 });
     }
     @Transactional
-    public void 글삭제하기(int id) {
+    public void 글수정하기(int id, Board requestBoard, PrincipalDetail principal) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> {
+                    return new IllegalArgumentException("글 찾기 실패");
+                }); // 영속화 완료
+        if (board.getUser().getId() != principal.getUser().getId()) {
+            throw new IllegalArgumentException("해당글을 삭제할 권한이 없습니다.");
+        }
+        board.setTitle(requestBoard.getTitle());
+        board.setContent(requestBoard.getContent());
+    }
+    @Transactional
+    public void 글삭제하기(int id, PrincipalDetail principal) {
 
-        /*Board board = boardRepository.findById(id).orElseThrow(() -> {
+        Board board = boardRepository.findById(id).orElseThrow(() -> {
             return new IllegalArgumentException("글 상세보기 실패 : 아이디를 찾을 수 없습니다.");
         });
         if (board.getUser().getId() != principal.getUser().getId()) {
             throw new IllegalArgumentException("해당글을 삭제할 권한이 없습니다.");
-        }*/
+        }
         boardRepository.deleteById(id);
     }
     @Transactional(readOnly = true)

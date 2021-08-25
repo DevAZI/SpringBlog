@@ -1,9 +1,8 @@
 package HelloSpringBlog.SpringBlog.controller.api;
 
 import HelloSpringBlog.SpringBlog.config.auth.PrincipalDetail;
-import HelloSpringBlog.SpringBlog.dto.ResponceDto;
+import HelloSpringBlog.SpringBlog.dto.ResponseDto;
 import HelloSpringBlog.SpringBlog.model.Board;
-import HelloSpringBlog.SpringBlog.model.User;
 import HelloSpringBlog.SpringBlog.service.BoardService;
 import HelloSpringBlog.SpringBlog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +21,26 @@ public class BoardApiController {
 
 
     @PostMapping("/api/board")
-    public ResponceDto<Integer> save(@RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principal) {
+    public ResponseDto<Integer> save(@RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principal) {
 
 
         boardService.글쓰기(board, principal.getUser());
-        return new ResponceDto<Integer>(HttpStatus.OK.value(), 1);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
     @DeleteMapping("/api/board/{id}")
     //@RequestMapping(value="/api/board/{id}", method=RequestMethod.DELETE)
-    public ResponceDto<Integer>deleteById(@PathVariable int id) {
-        boardService.글삭제하기(id);
-        return new ResponceDto<Integer>(HttpStatus.OK.value(), 1);
+    public ResponseDto<Integer> deleteById(@PathVariable int id, @AuthenticationPrincipal PrincipalDetail principal) {
+        boardService.글삭제하기(id, principal);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    }
+
+    @PutMapping("/api/board/{id}")
+    public ResponseDto<Integer> update(@PathVariable int id, @RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principal){
+        System.out.println("BoardApiController : update : id : "+id);
+        System.out.println("BoardApiController : update : board : "+board.getTitle());
+        System.out.println("BoardApiController : update : board : "+board.getContent());
+        boardService.글수정하기(id, board, principal);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
 

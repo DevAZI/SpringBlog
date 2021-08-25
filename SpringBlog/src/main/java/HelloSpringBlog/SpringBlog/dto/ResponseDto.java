@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ResponceDto <T>{
+public class ResponseDto<T>{
 
     int status;
     T data;
