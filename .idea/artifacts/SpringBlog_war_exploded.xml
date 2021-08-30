@@ -87,6 +87,7 @@
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.26" />
           <element id="library" level="project" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:2.3.3" />
           <element id="library" level="project" name="Maven: jakarta.activation:jakarta.activation-api:1.2.2" />
+          <element id="library" level="project" name="Maven: xmlpull:xmlpull:1.1.3.4a" />
         </element>
       </element>
       <element id="directory" name="META-INF">

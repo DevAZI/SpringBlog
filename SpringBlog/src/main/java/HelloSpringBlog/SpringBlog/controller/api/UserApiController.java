@@ -5,9 +5,7 @@ import HelloSpringBlog.SpringBlog.model.User;
 import HelloSpringBlog.SpringBlog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserApiController {
@@ -22,6 +20,12 @@ public class UserApiController {
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
+    @PutMapping("/user")
+    public ResponseDto<Integer> update(@RequestBody User user) {  //@RequestBody가 있어야 json데이터 받아올 수 있음
+
+        userService.회원수정(user);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    }
 
 
 
