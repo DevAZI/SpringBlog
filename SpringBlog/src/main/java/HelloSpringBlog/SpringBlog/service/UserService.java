@@ -4,6 +4,11 @@ import HelloSpringBlog.SpringBlog.model.RoleType;
 import HelloSpringBlog.SpringBlog.model.User;
 import HelloSpringBlog.SpringBlog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +22,7 @@ public class UserService {
 
     @Autowired
     private BCryptPasswordEncoder encode;
+
 
     @Transactional
     public void 회원가입(User user) {
@@ -42,6 +48,9 @@ public class UserService {
         String encPassword = encode.encode(rawPassword);
         persistance.setPassword(encPassword);
         persistance.setEmail(user.getEmail());
+
+
+
     }
     /*@Transactional(readOnly = true ) // select 할때 트랜젝션 시작, 서비스 종료시 트랜잭션 종료 ( 정합성 )
     public User 로그인(User user) {

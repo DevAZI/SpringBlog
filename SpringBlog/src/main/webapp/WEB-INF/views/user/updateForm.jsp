@@ -18,7 +18,7 @@
                 <input type="email"value="${principal.user.email}" class="form-control" placeholder="Enter email" id="email">
             </div>
         </form>
-        <button id ="btn-update" class="btn btn-primary">회원수정완료</button>
+        <button id ="btn-update" class="btn btn-primary">회원수정</button>
     </div>
 <script src = "/js/user.js" ></script>
 <%@ include file="../layout/footer.jsp"%>
