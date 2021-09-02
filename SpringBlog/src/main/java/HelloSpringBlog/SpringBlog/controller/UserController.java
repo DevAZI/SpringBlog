@@ -4,6 +4,7 @@ import HelloSpringBlog.SpringBlog.config.auth.PrincipalDetail;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UserController {
@@ -21,6 +22,11 @@ public class UserController {
     @GetMapping("/user/updateForm")
     public String updateForm(@AuthenticationPrincipal PrincipalDetail principal) {
         return "user/updateForm";
+
+    }
+    @GetMapping("/auth/kakao/callback")
+    public @ResponseBody String kakaoCallback(String code) {
+        return "카카오인증완료";
 
     }
 }
