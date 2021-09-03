@@ -22,7 +22,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id; //auto_increment
 
-    @Column(nullable = false, length = 30, unique = true)
+    @Column(nullable = false, length = 100, unique = true)
     private String username;//아이디
 
     @Column(nullable = false, length = 100)
@@ -38,6 +38,6 @@ public class User {
     @CreationTimestamp// 시간 자동 입력
     private Timestamp createDate;
 
-
+    private String oauth;
 
 }
